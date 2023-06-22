@@ -6,13 +6,8 @@
 */
 
 "use strict";
-
+import { GameManager } from "./gameManager.js";
 window.addEventListener('load', init, false);
-
 function init() {
-    console.log('App running!');
-    //1. Declare variables
-    //2. Initialize variables
-    //3. Events
-    //4. Program Logic
+    const gameManager = new GameManager();
 }
