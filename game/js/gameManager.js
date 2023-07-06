@@ -19,6 +19,16 @@ export class GameManager {
 
         this.homeController = new HomeController(this, this.contentContainer);
         this.presenting(HOME_STATE);
+
+        console.dir(this.contentContainer);
+
+        this.contentContainer.addEventListener('home-button-click', (event) => {
+            this.presenting(event.detail.state);
+        })
+
+        this.contentContainer.addEventListener('hide-complete', (event) => {
+            this.presenting(event.detail.state);
+        });
     }
 
     presenting(state) {
@@ -41,7 +51,6 @@ export class GameManager {
             case HOME_STATE:
                 this.backBtn.classList.add('hidden');
                 this.title.innerHTML = 'Home';
-                // this.controller = new HomeController(this, this.contentContainer);
                 break;
             case LOGIN_STATE:
                 this.title.innerHTML = 'Login';
@@ -66,7 +75,7 @@ export class GameManager {
 
     goto(state) {
         if (this.controller !== null) {
-            this.controller.hide(this.presenting.bind(this, state));
+            this.controller.hide(state);
         } else {
             this.presenting(state);
         }
