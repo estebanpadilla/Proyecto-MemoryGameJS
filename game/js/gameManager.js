@@ -21,27 +21,36 @@ export class GameManager {
         this.backBtn.onclick = this.goto.bind(this, HOME_STATE);
 
         this.homeController = new HomeController(this, this.contentContainer);
-        this.presenting(PLAY_STATE);
 
-        this.contentContainer.addEventListener('home-button-click', (event) => {
+        window.addEventListener('home-button-click', (event) => {
             this.presenting(event.detail.state);
         })
 
-        this.contentContainer.addEventListener('hide-complete', (event) => {
+        window.addEventListener('hide-complete', (event) => {
             this.presenting(event.detail.state);
         });
 
-        this.contentContainer.addEventListener('save-difficulty', (event) => {
+        window.addEventListener('save-difficulty', (event) => {
             this.difficulty = event.detail.difficulty;
             this.saveDifficulty()
         });
 
-        this.contentContainer.addEventListener('save-theme', (event) => {
+        window.addEventListener('save-theme', (event) => {
             this.theme = event.detail.theme;
             this.saveTheme();
         });
 
+        window.addEventListener('username-entered', (event) => {
+            this.username = event.detail.username;
+            this.saveUsername();
+            this.goto(HOME_STATE);
+        })
+
         this.loadDifficulty();
+        this.loadTheme();
+        this.loadUsername();
+
+        this.presenting(PLAY_STATE);
     }
 
     presenting(state) {
@@ -112,5 +121,16 @@ export class GameManager {
 
     saveTheme() {
         localStorage.setItem('theme', this.theme);
+    }
+
+    saveUsername() {
+        localStorage.setItem('username', this.username);
+    }
+
+    loadUsername() {
+        if (localStorage.getItem('username')) {
+            this.username = localStorage.getItem('username');
+            console.log('USERNAME:', this.username);
+        }
     }
 }
