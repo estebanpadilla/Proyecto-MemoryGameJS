@@ -21,6 +21,12 @@ body {
     background-color: var( --background-color);
 }
 
+hr {
+    width: 100%;
+    border-color: var(--primary-color-dark);
+    margin-bottom: 20px;
+}
+
 .mainContainer {
     display: flex;
     flex-direction: column;

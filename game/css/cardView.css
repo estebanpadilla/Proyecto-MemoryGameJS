@@ -19,6 +19,7 @@
     width: 100px;
     height: 120px;
     margin-top: 10px;
+    border-radius: 5px;
 }
 
 .cardView-hidden {
@@ -30,5 +31,5 @@
 }
 
 .cardView-discovered {
-    background-color: rgb(123, 0, 255);
+    background-color: rgb(238, 0, 255);
 }
