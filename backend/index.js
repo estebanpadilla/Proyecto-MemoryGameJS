@@ -56,31 +56,39 @@ app.post('/score', (request, response) => {
     console.log('*************');
     console.log(request);
     console.log('*************');
-    if (request.body !== undefined) {
-        const url = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/data/scores.json';
-        //const score = JSON.parse(request.body);
-        const { score } = request;
-        console.log('*************');
-        console.log(score);
-        console.log('*************');
-        // const score = JSON.parse(`{"score":101,"clicks":6,"time":95,"username":"Juan"}`);
-        console.log(score);
-        undefined
-        if (score !== undefined &&
-            score.clicks !== undefined &&
-            score.time !== undefined &&
-            score.score !== undefined) {
-            axios.post(url, score).then(function (result) {
-                response.send('Score saved!');
-            }).catch(function (error) {
-                response.send(error);
-            });
+
+    let body = [];
+    request.on('data', (chunk) => {
+        body.push(chunk);
+    }).on('end', () => {
+        body = Buffer.concat(body).toString();
+        // at this point, `body` has the entire request body stored in it as a string
+        if (body !== undefined) {
+            const url = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/data/scores.json';
+            const score = JSON.parse(body);
+            // const { score } = request;
+            console.log('*************');
+            console.log(score);
+            console.log('*************');
+            // const score = JSON.parse(`{"score":101,"clicks":6,"time":95,"username":"Juan"}`);
+            console.log(score);
+            undefined
+            if (score !== undefined &&
+                score.clicks !== undefined &&
+                score.time !== undefined &&
+                score.score !== undefined) {
+                axios.post(url, score).then(function (result) {
+                    response.send('Score saved!');
+                }).catch(function (error) {
+                    response.send(error);
+                });
+            } else {
+                response.send('Score undefined or null!');
+            }
         } else {
-            response.send('Score undefined or null!');
+            response.send('request.body undefined or null!');
         }
-    } else {
-        response.send('request.body undefined or null!');
-    }
+    });
 });
 
 // app.listen(port, () => {
