@@ -39,7 +39,7 @@ export class CardView extends View {
     }
 
     showOnSelected() {
-        if (this.card.isSelected) {
+        if (this.card.isSelected && !this.card.isDiscovered) {
             this.iconContainer.innerHTML = this.card.icon;
             this.iconContainer.classList.remove('cardView-hidden');
             this.iconContainer.classList.add('cardView-selected');

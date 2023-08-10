@@ -51,7 +51,7 @@ export class GameManager {
         this.loadTheme();
         this.loadUsername();
 
-        // this.presenting(SCORES_STATE);
+        this.presenting(SCORES_STATE);
     }
 
     presenting(state) {
