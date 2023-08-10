@@ -53,26 +53,14 @@ app.get('/scores', (request, response) => {
 });
 
 app.post('/score', (request, response) => {
-    console.log('*************');
-    console.log(request);
-    console.log('*************');
-
     let body = [];
     request.on('data', (chunk) => {
         body.push(chunk);
     }).on('end', () => {
-        body = Buffer.concat(body).toString();
-        // at this point, `body` has the entire request body stored in it as a string
-        if (body !== undefined) {
+        const jsonData = Buffer.concat(body).toString();
+        if (jsonData !== undefined) {
             const url = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/data/scores.json';
-            const score = JSON.parse(body);
-            // const { score } = request;
-            console.log('*************');
-            console.log(score);
-            console.log('*************');
-            // const score = JSON.parse(`{"score":101,"clicks":6,"time":95,"username":"Juan"}`);
-            console.log(score);
-            undefined
+            const score = JSON.parse(jsonData);
             if (score !== undefined &&
                 score.clicks !== undefined &&
                 score.time !== undefined &&
