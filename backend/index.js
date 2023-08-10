@@ -54,7 +54,7 @@ app.get('/scores', (request, response) => {
 
 app.post('/score', (request, response) => {
     console.log('*************');
-    console.log(request.body);
+    console.log(request);
     console.log('*************');
     if (request.body !== null) {
         const url = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/data/scores.json';
