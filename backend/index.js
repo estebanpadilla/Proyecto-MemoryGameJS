@@ -56,7 +56,7 @@ app.post('/score', (request, response) => {
     console.log('*************');
     console.log(request);
     console.log('*************');
-    if (request.body !== null) {
+    if (request.body !== undefined) {
         const url = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/data/scores.json';
         //const score = JSON.parse(request.body);
         const { score } = request;
@@ -65,10 +65,11 @@ app.post('/score', (request, response) => {
         console.log('*************');
         // const score = JSON.parse(`{"score":101,"clicks":6,"time":95,"username":"Juan"}`);
         console.log(score);
-        if (score !== null &&
-            score.clicks !== null &&
-            score.time !== null &&
-            score.score !== null) {
+        undefined
+        if (score !== undefined &&
+            score.clicks !== undefined &&
+            score.time !== undefined &&
+            score.score !== undefined) {
             axios.post(url, score).then(function (result) {
                 response.send('Score saved!');
             }).catch(function (error) {
