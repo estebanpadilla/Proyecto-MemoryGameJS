@@ -60,6 +60,9 @@ app.post('/score', (request, response) => {
         const url = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/data/scores.json';
         //const score = JSON.parse(request.body);
         const { score } = request;
+        console.log('*************');
+        console.log(score);
+        console.log('*************');
         // const score = JSON.parse(`{"score":101,"clicks":6,"time":95,"username":"Juan"}`);
         console.log(score);
         if (score !== null &&
