@@ -53,23 +53,25 @@ app.get('/scores', (request, response) => {
 });
 
 app.post('/score', (request, response) => {
-    const url = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/data/scores.json';
-
     console.log(request);
-    const score = JSON.parse(request.body);
-
-    console.log(score);
-    if (score !== null &&
-        score.clicks !== null &&
-        score.time !== null &&
-        score.score !== null) {
-        axios.post(url, score).then(function (result) {
-            response.send('Score saved!');
-        }).catch(function (error) {
-            response.send(error);
-        });
+    if (request.body !== null) {
+        const url = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/data/scores.json';
+        const score = JSON.parse(request.body);
+        console.log(score);
+        if (score !== null &&
+            score.clicks !== null &&
+            score.time !== null &&
+            score.score !== null) {
+            axios.post(url, score).then(function (result) {
+                response.send('Score saved!');
+            }).catch(function (error) {
+                response.send(error);
+            });
+        } else {
+            response.send('Score undefined or null!');
+        }
     } else {
-        response.send('Scoren Undefine or null!');
+        response.send('request.body undefined or null!');
     }
 });
 
