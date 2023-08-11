@@ -6,7 +6,7 @@ const port = 3000;
 
 app.use(cors());
 
-const dbUrl = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/';
+const dataBaseURL = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/';
 
 const food = ['🍏', '🍎', '🍐', '🍊', '🍋', '🍌', '🍉', '🍇', '🍓', '🍈', '🍒', '🍑', '🍍', '🥥', '🥝', '🍅', '🥑', '🍆', '🌶', '🥒', '🥦', '🌽', '🥕', '🥗', '🥔', '🍠', '🥜', '🍯', '🍞', '🥐', '🥖', '🥨', '🥞', '🧀', '🍗', '🍖', '🥩', '🍤', '🥚', '🍳', '🥓', '🍔', '🍟', '🌭', '🍕', '🍝', '🥪', '🥙', '🌮', '🌯', '🍜', '🥘', '🍲', '🥫', '🍥', '🍣', '🍱', '🍛', '🍙', '🍚', '🍘', '🥟', '🍢', '🍡', '🍧', '🍨', '🍦', '🍰', '🎂', '🥧', '🍮', '🍭', '🍬', '🍫', '🍿', '🍩', '🍪', '🥠', '☕', '🍵', '🥣', '🍼', '🥤', '🥛', '🍺', '🍻', '🍷', '🥂', '🥃', '🍸', '🍹', '🍾', '🍶', '🥄', '🍴', '🍽', '🥢', '🥡'];
 
@@ -40,7 +40,7 @@ app.get('/cards/:difficulty/:theme', (request, response) => {
 });
 
 app.get('/scores', (request, response) => {
-    const url = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/data/scores.json';
+    const url = `${dataBaseURL}/data/scores.json`;
     axios.get(url).then(function (result) {
         console.log(result.data)
         response.send(result.data);
@@ -59,7 +59,7 @@ app.post('/score', (request, response) => {
     }).on('end', () => {
         const jsonData = Buffer.concat(body).toString();
         if (jsonData !== undefined) {
-            const url = 'https://proyecto-memorygamejs-default-rtdb.firebaseio.com/data/scores.json';
+            const url = `${dataBaseURL}/data/scores.json`;
             const score = JSON.parse(jsonData);
             if (score !== undefined &&
                 score.clicks !== undefined &&
@@ -87,12 +87,19 @@ function randomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getIconIndex(iconIndex, iconList) {
+function getIconIndex(iconIndex, length, cards) {
 
-    let newIconIndex = randomInteger(0, (iconList.length - 1));
+    let newIconIndex = randomInteger(0, (length - 1));
+
+    for (let i = 0; i < cards.length; i++) {
+        const card = cards[i];
+        if (card.id === newIconIndex) {
+            return getIconIndex(iconIndex, length, cards);
+        }
+    }
 
     if (iconIndex === newIconIndex) {
-        return getIconIndex(iconIndex, iconList);
+        return getIconIndex(iconIndex, length, cards);
     }
 
     return newIconIndex;
@@ -120,7 +127,7 @@ function getCards(dificulty, theme) {
     }
 
     for (let i = 0; i < dificulty; i++) {
-        var iconIndex = getIconIndex(-1, iconList);
+        var iconIndex = getIconIndex(-1, iconList.length, cards);
         var card = {
             "isDiscovered": false,
             "icon": iconList[iconIndex],
