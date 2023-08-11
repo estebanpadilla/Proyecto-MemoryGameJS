@@ -4,7 +4,8 @@ import { ScoreView } from "./scoreView.js";
 export class ScoresView extends ControllerView {
     constructor(controller, parent) {
         super(controller, parent);
-        this.elementsContainer.className = 'scoresView';
+        this.container.className = 'scoresView';
+        this.elementsContainer.className = 'scoresView-elementsContainer';
     }
 
     showScores(scores) {

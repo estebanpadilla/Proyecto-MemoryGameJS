@@ -1,4 +1,9 @@
 .loginView {
+    display: flex;
+    justify-content: center;
+}
+
+.loginView-elementsContainer {
     width: 100%;
     height: 100%;
     
@@ -8,8 +13,14 @@
     justify-content: center;
     flex-direction: column;
     background-color: var(--background-color);
+    max-width: 500px;
 }
 
 .loginView-usernameIn {
-    
+    width: 60%;
+    height: 50px;
+    border-radius: 10px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    font-size: 20px;
 }

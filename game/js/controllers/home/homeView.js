@@ -5,7 +5,7 @@ import { ControllerView } from "../controllerView.js";
 export class HomeView extends ControllerView {
     constructor(controller, parent) {
         super(controller, parent);
-        this.container.id = 'homeView';
+        this.container.className = 'homeView';
         this.elementsContainer.className = 'homeView-elementsContainer';
 
         img({ src: './src/images/logo.svg', className: 'homeView-logo' }, this.elementsContainer);
@@ -24,6 +24,8 @@ export class HomeView extends ControllerView {
         var difficultyBtn = div({ innerHTML: 'Difficulty', className: 'game-button homeView-button', onclick: this.onButtonClick.bind(this, DIFFICULTY_STATE) }, buttonsContainer);
 
         var loginBtn = div({ innerHTML: 'Login', className: 'game-button game-button-login', onclick: this.onButtonClick.bind(this, LOGIN_STATE) }, this.elementsContainer);
+
+        this.fadeContainer.classList.add('hidden');
     }
 
     onButtonClick(state) {

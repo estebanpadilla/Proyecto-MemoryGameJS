@@ -4,10 +4,11 @@ import { ControllerView } from "../controllerView.js";
 export class LoginView extends ControllerView {
     constructor(controller, parent) {
         super(controller, parent);
-        this.elementsContainer.className = 'loginView';
+        this.container.className = 'loginView';
+        this.elementsContainer.className = 'loginView-elementsContainer';
 
         this.usernameIn = input({ placeholder: 'Username', className: 'loginView-usernameIn' }, this.elementsContainer);
-        this.okBtn = div({ innerHTML: 'OK', className: 'game-button', onclick: this.onOkBtn.bind(this) }, this.elementsContainer);
+        this.okBtn = div({ innerHTML: 'OK', className: 'game-button spaceTop-10', onclick: this.onOkBtn.bind(this) }, this.elementsContainer);
     }
 
     onOkBtn() {

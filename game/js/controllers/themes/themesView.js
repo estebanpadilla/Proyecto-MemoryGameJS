@@ -5,15 +5,16 @@ import { ControllerView } from "../controllerView.js";
 export class ThemesView extends ControllerView {
     constructor(controller, parent) {
         super(controller, parent);
-        this.elementsContainer.className = 'themesView';
+        this.container.className = 'themesView';
+        this.elementsContainer.className = 'themesView-elementsContainer';
 
-        div({ innerHTML: 'Faces', className: 'game-button', onclick: this.onButtonClick.bind(this, THEME_FACES) }, this.elementsContainer);
+        div({ innerHTML: 'Faces', className: 'game-button spaceTop-10', onclick: this.onButtonClick.bind(this, THEME_FACES) }, this.elementsContainer);
 
-        div({ innerHTML: 'Food', className: 'game-button', onclick: this.onButtonClick.bind(this, THEME_FOOD) }, this.elementsContainer);
+        div({ innerHTML: 'Food', className: 'game-button spaceTop-10', onclick: this.onButtonClick.bind(this, THEME_FOOD) }, this.elementsContainer);
 
-        div({ innerHTML: 'Flags', className: 'game-button', onclick: this.onButtonClick.bind(this, THEME_FLAGS) }, this.elementsContainer);
+        div({ innerHTML: 'Flags', className: 'game-button spaceTop-10', onclick: this.onButtonClick.bind(this, THEME_FLAGS) }, this.elementsContainer);
 
-        div({ innerHTML: 'Animals', className: 'game-button', onclick: this.onButtonClick.bind(this, THEME_ANIMALS) }, this.elementsContainer);
+        div({ innerHTML: 'Animals', className: 'game-button spaceTop-10', onclick: this.onButtonClick.bind(this, THEME_ANIMALS) }, this.elementsContainer);
     }
 
     onButtonClick(theme) {

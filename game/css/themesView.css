@@ -1,4 +1,9 @@
 .themesView {
+    display: flex;
+    justify-content: center;
+}
+
+.themesView-elementsContainer {
     width: 100%;
     height: 100%;
 
@@ -8,4 +13,5 @@
     justify-content: center;
     flex-direction: column;
     background-color: var(--background-color);
+    max-width: 500px;
 }

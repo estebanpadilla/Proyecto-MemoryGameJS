@@ -8,7 +8,8 @@
     border-width: 2px;
     border-style: solid;
     width: 80px;
-    height: 100px;
+    height: 110px;
+    user-select: none;
 }
 
 .cardView-container {
@@ -16,10 +17,10 @@
     align-items: center;
     justify-content: center;
     background-color: var(--primary-color-dark); 
-    width: 100px;
     height: 120px;
     margin-top: 10px;
     border-radius: 5px;
+    padding: 5px;
 }
 
 .cardView-hidden {

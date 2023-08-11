@@ -5,7 +5,7 @@ import { ControllerView } from "../controllerView.js";
 export class PlayView extends ControllerView {
     constructor(controller, parent) {
         super(controller, parent);
-        this.container.id = 'playView';
+        this.container.className = 'playView';
         this.elementsContainer.className = 'playView-elementsContainer';
         this.hudContainer = div({ className: 'playView-hudContainer' }, this.elementsContainer);
         this.cardsContainer = div({ className: 'playView-cardsContainer' }, this.elementsContainer);
