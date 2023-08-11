@@ -44,7 +44,7 @@ app.get('/scores', (request, response) => {
     axios.get(url).then(function (result) {
 
         var sortedScores = [];
-        var scoresData = response.data;
+        var scoresData = result.data;
 
         if (scoresData !== null) {
             var scoresTemp = [];
