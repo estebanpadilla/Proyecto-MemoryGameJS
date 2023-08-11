@@ -42,8 +42,24 @@ app.get('/cards/:difficulty/:theme', (request, response) => {
 app.get('/scores', (request, response) => {
     const url = `${dataBaseURL}/data/scores.json`;
     axios.get(url).then(function (result) {
-        console.log(result.data)
-        response.send(result.data);
+
+        var sortedScores = [];
+        var scoresData = response.data;
+
+        if (scoresData !== null) {
+            var scoresTemp = [];
+            for (const key in scoresData) {
+                const score = scoresData[key];
+                scoresTemp.push(score);
+            }
+
+            sortedScores = scoresTemp.sort(function (a, b) {
+                return a.score - b.score;
+            });
+        }
+
+        response.send(JSON.stringify(sortedScores.splice(0, 10)));
+
     }).catch(function (error) {
         console.log(error);
         response.send('Error getting scores!');

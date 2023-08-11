@@ -13,6 +13,7 @@ export class PlayController extends Controller {
         this.timer = null;
         this.time = 0;
         this.clicks = 0;
+        this.showGameCompleteTimer = null;
 
         window.addEventListener('card-selected', (event) => {
             this.onCardSelected();
@@ -87,7 +88,12 @@ export class PlayController extends Controller {
                     this.killGameTimer();
                     let score = this.clicks + this.time;
                     this.service.sendScore(score, this.clicks, this.time, this.gameManager.username);
-                    //TODO: Show GameComplete Controller?
+                    this.showGameCompleteTimer = window.setTimeout(() => {
+                        this.view.showGameComplete(this.clicks, this.time);
+                        window.clearTimeout(this.showGameCompleteTimer);
+                        this.showGameCompleteTimer = null;
+                    }, 1000);
+
                 }
             } else {
                 this.hiddenTimer = window.setTimeout(() => {
@@ -110,6 +116,8 @@ export class PlayController extends Controller {
     killGameTimer() {
         window.clearInterval(this.timer);
         this.timer = null;
+        window.clearTimeout(this.showGameCompleteTimer);
+        this.showGameCompleteTimer = null;
     }
 
     checkGameComplete() {

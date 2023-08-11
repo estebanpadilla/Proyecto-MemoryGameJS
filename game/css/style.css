@@ -101,7 +101,7 @@ hr {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .spaceTop-10 {
