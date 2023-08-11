@@ -17,7 +17,7 @@ export class PlayView extends ControllerView {
                 onResetBtn.bind(this)
         }, this.hudContainer);
 
-        this.completeContainer = div({ className: 'playView-completeContainer hidden' }, this.container);
+        this.completeContainer = div({ className: 'playView-completeContainer hidden' }, this.elementsContainer);
         this.completeClicksText = p({ innerHTML: 'Clicks: 0', className: 'playView-text playView-completeText' }, this.completeContainer);
         this.completeTimeText = p({ innerHTML: 'Clicks: 0', className: 'playView-text playView-completeText' }, this.completeContainer);
         this.completeScoreText = p({ innerHTML: 'Clicks: 0', className: 'playView-text playView-completeText' }, this.completeContainer);
