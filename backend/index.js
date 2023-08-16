@@ -77,15 +77,18 @@ app.post('/score', (request, response) => {
         if (jsonData !== undefined) {
             const url = `${dataBaseURL}/data/scores.json`;
             const score = JSON.parse(jsonData);
+
             if (score !== undefined &&
                 score.clicks !== undefined &&
                 score.time !== undefined &&
                 score.score !== undefined) {
+
                 axios.post(url, score).then(function (result) {
                     response.send('Score saved!');
                 }).catch(function (error) {
                     response.send(error);
                 });
+
             } else {
                 response.send('Score undefined or null!');
             }
