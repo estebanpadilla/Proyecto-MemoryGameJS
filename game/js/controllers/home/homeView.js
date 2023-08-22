@@ -1,6 +1,7 @@
 import { CREDITS_STATE, DIFFICULTY_STATE, LOGIN_STATE, PLAY_STATE, SCORES_STATE, THEMES_STATE } from "../../libs/constants.js";
 import { div, img, p } from "../../libs/html.js";
 import { ControllerView } from "../controllerView.js";
+import { ScoreView } from "../scores/scoreView.js";
 
 export class HomeView extends ControllerView {
     constructor(controller, parent) {
@@ -10,7 +11,7 @@ export class HomeView extends ControllerView {
 
         img({ src: './src/images/logo.svg', className: 'homeView-logo' }, this.elementsContainer);
         p({ innerHTML: 'Can you beat this?', className: 'game-text' }, this.elementsContainer);
-        div({ innerHTML: 'Scores Data', className: 'homeView-scores-widget' }, this.elementsContainer);
+        this.scoreContainer = div({ innerHTML: 'Scores Data', className: 'homeView-scores-widget' }, this.elementsContainer);
 
         p({ innerHTML: 'Are you ready?', className: 'game-text homeView-game-text' }, this.elementsContainer);
 
@@ -38,5 +39,13 @@ export class HomeView extends ControllerView {
             composed: false,
         });
         this.container.dispatchEvent(event);
+    }
+
+    showScore(score) {
+        if (score) {
+            this.scoreContainer.innerHTML = '';
+            let scoreView = new ScoreView(this.scoreContainer, score);
+            scoreView.container.classList.add('scoreView-full-width');
+        }
     }
 }

@@ -8,29 +8,24 @@ export class PlayService extends Service {
 
     getCards(difficulty, theme) {
         var cards = [];
-        var url = `https://esteban-memory-game.vercel.app/cards/${difficulty}/${theme}`;
-        // var url = `http://localhost:3000/cards/${difficulty}/${theme}`;
-        var request = new XMLHttpRequest();
-        request.open('get', url);
-        request.onload = () => {
-            if (request.status === 200) {
-                var data = JSON.parse(request.response);
+        var url = `${this.baseURL}/cards/${difficulty}/${theme}`;
+        fetch(url).then((response) => {
+            response.json().then((data) => {
                 data.cards.forEach(cardData => {
                     var card = new Card(cardData.id, cardData.icon);
                     cards.push(card);
                 });
-            } else {
-                console.error('Error requesting cards');
-            }
-            this.controller.showCards(cards);
-        }
-        request.send();
+                this.controller.showCards(cards);
+            }, (error) => {
+
+            });
+        }, (reason) => {
+
+        });
     }
 
     sendScore(score, clicks, time, username) {
-        // var url = `http://localhost:3000/score`;
-        var url = `https://esteban-memory-game.vercel.app/score`;
-
+        var url = `${this.baseURL}/score`;
         var request = new XMLHttpRequest();
         request.open('POST', url);
         request.send(JSON.stringify({ score: score, clicks: clicks, time: time, username: username }));

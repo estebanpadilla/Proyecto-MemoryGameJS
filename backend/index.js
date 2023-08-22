@@ -39,6 +39,40 @@ app.get('/cards/:difficulty/:theme', (request, response) => {
     response.send(JSON.stringify(data));
 });
 
+
+app.get('/score', (request, response) => {
+    const url = `${dataBaseURL}/data/scores.json`;
+    axios.get(url).then(function (result) {
+
+        var sortedScores = [];
+        var scoresData = result.data;
+
+        if (scoresData !== null) {
+            var scoresTemp = [];
+            for (const key in scoresData) {
+                const score = scoresData[key];
+                scoresTemp.push(score);
+            }
+
+            sortedScores = scoresTemp.sort(function (a, b) {
+                return a.score - b.score;
+            });
+        }
+
+        if (sortedScores.length > 0) {
+            response.send(JSON.stringify(sortedScores[0]));
+        } else {
+            response.send('null');
+        }
+    }).catch(function (error) {
+        console.log(error);
+        response.send('Error getting scores!');
+    }).finally(function () {
+        // always executed
+    });
+});
+
+
 app.get('/scores', (request, response) => {
     const url = `${dataBaseURL}/data/scores.json`;
     axios.get(url).then(function (result) {

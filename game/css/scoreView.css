@@ -56,3 +56,7 @@
     font-weight: bold;
     user-select: none;
 }
+
+.scoreView-full-width {
+    width: 100%;
+}

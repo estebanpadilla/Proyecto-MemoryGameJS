@@ -10,6 +10,7 @@ import { CREDITS_STATE, DIFFICULTY_MEDIUM, DIFFICULTY_STATE, HOME_STATE, LOGIN_S
 
 export class GameManager {
     constructor() {
+        this.IS_DEVELOPMENT = true;
         this.difficulty = DIFFICULTY_MEDIUM;
         this.theme = THEME_FOOD;
         this.username = '';
@@ -51,7 +52,7 @@ export class GameManager {
         this.loadTheme();
         this.loadUsername();
 
-        // this.presenting(PLAY_STATE);
+        this.presenting(HOME_STATE);
     }
 
     presenting(state) {
@@ -72,6 +73,7 @@ export class GameManager {
                 this.controller = new DifficultyController(this, this.contentContainer);
                 break;
             case HOME_STATE:
+                this.homeController.refresh();
                 this.backBtn.classList.add('hidden');
                 this.title.innerHTML = 'Home';
                 break;

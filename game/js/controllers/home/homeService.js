@@ -1,29 +1,26 @@
 import { Score } from "../../models/score.js";
 import { Service } from "../service.js";
 
-export class ScoresService extends Service {
+export class HomeService extends Service {
     constructor(controller) {
         super(controller);
     }
 
-    getScores() {
-        var scores = [];
-        var url = `${this.baseURL}/scores`;
+    getScore() {
+        let score = null;
+        var url = `${this.baseURL}/score`;
         var request = new XMLHttpRequest();
         request.open('get', url);
         request.onload = () => {
             if (request.status === 200) {
                 var data = JSON.parse(request.response);
-                console.log(data);
-                for (const key in data) {
-                    const scoreData = data[key];
-                    let score = new Score(scoreData.clicks, scoreData.score, scoreData.time, scoreData.username);
-                    scores.push(score);
+                if (data !== null) {
+                    score = new Score(data.clicks, data.score, data.time, data.username);
                 }
             } else {
                 console.error('Error requesting scores');
             }
-            this.controller.showScores(scores);
+            this.controller.showScore(score);
         }
         request.send();
     }
