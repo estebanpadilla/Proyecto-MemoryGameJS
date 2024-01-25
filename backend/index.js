@@ -132,6 +132,22 @@ app.post('/score', (request, response) => {
     });
 });
 
+app.get('/products', (req, res) => {
+
+    const url = 'https://api.sephora.com/v2/catalog/search?callAdSvc=0&currentPage=1&forcePriceRangeRwd=true&includeEDD=false&loc=en-US&pickupStoreId=1704&q=sale&type=keyword';
+
+    axios.get(url)
+        .then(function (response) {
+            res.send(response.data);
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+            res.send("FAIL");
+        });
+});
+
+
 // app.listen(port, () => {
 //     console.log(`Example app listening on port ${port}`);
 // });

@@ -10,7 +10,7 @@ import { CREDITS_STATE, DIFFICULTY_MEDIUM, DIFFICULTY_STATE, HOME_STATE, LOGIN_S
 
 export class GameManager {
     constructor() {
-        this.IS_DEVELOPMENT = true;
+        this.IS_DEVELOPMENT = false;
         this.difficulty = DIFFICULTY_MEDIUM;
         this.theme = THEME_FOOD;
         this.username = '';
@@ -26,7 +26,7 @@ export class GameManager {
 
         window.addEventListener('home-button-click', (event) => {
             this.presenting(event.detail.state);
-        })
+        });
 
         window.addEventListener('hide-complete', (event) => {
             this.presenting(event.detail.state);
@@ -34,7 +34,7 @@ export class GameManager {
 
         window.addEventListener('save-difficulty', (event) => {
             this.difficulty = event.detail.difficulty;
-            this.saveDifficulty()
+            this.saveDifficulty();
         });
 
         window.addEventListener('save-theme', (event) => {
@@ -46,7 +46,7 @@ export class GameManager {
             this.username = event.detail.username;
             this.saveUsername();
             this.goto(HOME_STATE);
-        })
+        });
 
         this.loadDifficulty();
         this.loadTheme();
